@@ -4,7 +4,7 @@ import Button from "./Button";
 import Task from "./Task";
 import TaskForm from "./TaskForm";
 import classNames from "classnames";
-import formatDate from "../utility/formatDate";
+import formatDate from "../utils/formatDate";
 type Props = {
   state: string;
 };
@@ -30,7 +30,7 @@ const Container = ({ state }: Props) => {
   };
   return (
     <section
-      className="bg-white w-[305px] h-fit p-2 rounded-sm shadow-md"
+      className="bg-white dark:bg-gray-200 w-[305px] h-fit p-2 rounded-sm shadow-md"
       onDragOver={(e) => {
         e.preventDefault();
         setIsDropping(true);

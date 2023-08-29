@@ -4,21 +4,13 @@ import { TaskType } from "../components/Task";
 
 interface TaskStore {
   tasks: TaskType[];
-  addTask: (
-    id: number,
-    tile: string,
-    state: string,
-    date: string
-  ) => void;
+  darkMode: boolean;
+  setDarkMode: () => void;
+  addTask: (id: number, tile: string, state: string, date: string) => void;
   deleteTask: (id: number) => void;
   draggedTask: number;
   setDraggedTask: (id: number) => void;
-  moveTask: (
-    id: number,
-    title: string,
-    state: string,
-    date: string
-  ) => void;
+  moveTask: (id: number, title: string, state: string, date: string) => void;
 }
 
 const useTaskStore = create<TaskStore>()(
@@ -26,6 +18,9 @@ const useTaskStore = create<TaskStore>()(
     persist(
       (set) => ({
         tasks: [],
+        darkMode: false,
+        setDarkMode: () =>
+          set((store) => ({ darkMode: store.darkMode ? false : true })),
         draggedTask: 0,
         addTask: (id, title, state, date) =>
           set((store) => ({
