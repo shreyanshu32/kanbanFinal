@@ -31,8 +31,10 @@ const Container = ({ state }: Props) => {
       onDragLeave={() => setIsDropping(false)}
       onDrop={() => {
         setIsDropping(false);
-        const dragged = tasks.filter((task) => task.id == draggedTask)[0].title;
-        moveTask(draggedTask, dragged, state, date);
+        const title = tasks.filter((task) => task.id == draggedTask)[0].title;
+        const description = tasks.filter((task) => task.id == draggedTask)[0]
+          .description;
+        moveTask(draggedTask, title, description, state, date);
         setDraggedTask(0);
       }}
     >
@@ -64,6 +66,7 @@ const Container = ({ state }: Props) => {
           <Task
             key={task.id}
             title={task.title}
+            description={task.description}
             id={task.id}
             state={task.state}
             date={task.date}

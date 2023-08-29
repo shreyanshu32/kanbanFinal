@@ -16,13 +16,28 @@ const TaskForm = ({ setTaskState, status }: Props) => {
     document.addEventListener("keydown", handleEscKey);
     return () => document.removeEventListener("keydown", handleEscKey);
   });
+  const submitOnEnter = (e: React.KeyboardEvent) => {
+    if (e.key === "Enter") handleSubmit();
+  };
   const addTask = useTaskStore((store) => store.addTask);
-  const inputRef = useRef<HTMLInputElement>(null);
+  const titleRef = useRef<HTMLInputElement>(null);
+  const descRef = useRef<HTMLInputElement>(null);
   const date = formatDate;
   const handleSubmit = () => {
-    if (inputRef.current) {
-      addTask(Date.now(), inputRef.current.value, status, date);
-      setTaskState(false);
+    if (titleRef.current && descRef.current) {
+      if (
+        titleRef.current.value.length > 2 &&
+        descRef.current.value.length > 5
+      ) {
+        addTask(
+          Date.now(),
+          titleRef.current.value,
+          descRef.current.value,
+          status,
+          date
+        );
+        setTaskState(false);
+      }
     }
   };
   return (
@@ -31,22 +46,27 @@ const TaskForm = ({ setTaskState, status }: Props) => {
       className="absolute top-0 left-0 h-screen w-screen bg-[#381717b9] dark:bg-[#484848b6] grid place-content-center z-50"
     >
       <div
-        className="p-2 px-4 rounded-sm bg-white dark:bg-gray-600 text-white"
+        className="p-4 px-8 rounded-sm bg-white dark:bg-gray-600 shadow-md"
         onClick={(e) => e.stopPropagation()}
       >
-        <h1 className="pb-1 font-[500]">{status}</h1>
-        <div className="flex gap-1 pb-2">
+        <h1 className="pb-1 text-lg font-[500] dark:text-white">{status}</h1>
+        <div className="flex flex-col gap-1.5 pb-2 ">
           <input
-            className="p-1 w-[270px] text-sm outline-none border-2 border-blue-400 rounded-sm text-black"
-            placeholder="Add task"
+            placeholder="Task title... (at least 3 characters)"
             type="text"
-            onKeyDown={(e) => {
-              if (e.key === "Enter") handleSubmit();
-            }}
+            onKeyDown={(e) => submitOnEnter(e)}
             autoFocus
-            ref={inputRef}
+            ref={titleRef}
           />
-          <Button handleClick={() => handleSubmit()}>Add Task</Button>
+          <input
+            placeholder="Task description... (at least 6 characters)"
+            type="text"
+            ref={descRef}
+            onKeyDown={(e) => submitOnEnter(e)}
+          />
+          <Button className="py-1.5" handleClick={() => handleSubmit()}>
+            Create
+          </Button>
         </div>
       </div>
     </section>

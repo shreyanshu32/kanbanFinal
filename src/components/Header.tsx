@@ -15,7 +15,7 @@ const Header = () => {
       <div className="max-w-[1250px] mx-auto flex items-center justify-between">
         <h1>Kanban</h1>
         <button
-          className="hover:bg-gray-100 active:bg-white dark:active:bg-gray-600 dark:hover:bg-gray-700 h-[35px] w-[35px] grid place-content-center rounded-full"
+          className="hover:bg-gray-100 active:bg-gray-200 dark:active:bg-gray-600 dark:hover:bg-gray-700 h-[35px] w-[35px] grid place-content-center rounded-full"
           onClick={() => setDarkMode()}
         >
           {darkMode ? <BsFillMoonFill /> : <BsSun />}

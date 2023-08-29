@@ -1,16 +1,28 @@
 import { create } from "zustand";
 import { devtools, persist } from "zustand/middleware";
-import { TaskType } from "../components/Task";
+import TaskType from "../entities/TaskType";
 
 interface TaskStore {
   tasks: TaskType[];
   darkMode: boolean;
   setDarkMode: () => void;
-  addTask: (id: number, tile: string, state: string, date: string) => void;
+  addTask: (
+    id: number,
+    tile: string,
+    description: string,
+    state: string,
+    date: string
+  ) => void;
   deleteTask: (id: number) => void;
   draggedTask: number;
   setDraggedTask: (id: number) => void;
-  moveTask: (id: number, title: string, state: string, date: string) => void;
+  moveTask: (
+    id: number,
+    title: string,
+    description: string,
+    state: string,
+    date: string
+  ) => void;
 }
 
 const useTaskStore = create<TaskStore>()(
@@ -22,19 +34,19 @@ const useTaskStore = create<TaskStore>()(
         setDarkMode: () =>
           set((store) => ({ darkMode: store.darkMode ? false : true })),
         draggedTask: 0,
-        addTask: (id, title, state, date) =>
+        addTask: (id, title, description, state, date) =>
           set((store) => ({
-            tasks: [...store.tasks, { id, title, state, date }],
+            tasks: [...store.tasks, { id, title, description, state, date }],
           })),
         deleteTask: (id) =>
           set((store) => ({
             tasks: store.tasks.filter((task) => task.id !== id),
           })),
         setDraggedTask: (id) => set({ draggedTask: id }),
-        moveTask: (id, title, state, date) =>
+        moveTask: (id, title, description, state, date) =>
           set((store) => ({
             tasks: store.tasks.map((task) =>
-              task.id == id ? { id, title, state, date } : task
+              task.id == id ? { id, title, description, state, date } : task
             ),
           })),
       }),
