@@ -9,10 +9,9 @@ type Props = {
   state: string;
 };
 const Container = ({ state }: Props) => {
-  const [inputValue, setInputValue] = useState("");
   const [isDropping, setIsDropping] = useState(false);
   const [addTaskWindowState, setAddTaskWindowState] = useState(false);
-  const { tasks, addTask } = useTaskStore();
+  const tasks = useTaskStore((store) => store.tasks);
   const filteredTasks = useMemo(
     () => tasks.filter((task) => task.state === state),
     [tasks, state]
@@ -21,13 +20,7 @@ const Container = ({ state }: Props) => {
   const draggedTask = useTaskStore((store) => store.draggedTask);
   const moveTask = useTaskStore((store) => store.moveTask);
   const date = formatDate;
-  const handleSubmit = () => {
-    if (inputValue.length > 2) {
-      addTask(Date.now(), inputValue, state, date);
-      setInputValue("");
-      setAddTaskWindowState((state) => !state);
-    }
-  };
+
   return (
     <section
       className="bg-white dark:bg-gray-200 w-[305px] h-fit p-2 rounded-sm shadow-md"
@@ -81,10 +74,7 @@ const Container = ({ state }: Props) => {
       {addTaskWindowState && (
         <TaskForm
           status={state}
-          inputValue={inputValue}
-          setInputValue={(value) => setInputValue(value)}
           setTaskState={(value) => setAddTaskWindowState(value)}
-          handleSubmit={() => handleSubmit()}
         />
       )}
     </section>

@@ -1,21 +1,14 @@
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
+import useTaskStore from "../data/store";
+import formatDate from "../utils/formatDate";
 import Button from "./Button";
 
 interface Props {
-  inputValue: string;
-  setInputValue: (value: string) => void;
   setTaskState: (value: boolean) => void;
-  handleSubmit: () => void;
   status: string;
 }
 
-const TaskForm = ({
-  inputValue,
-  setTaskState,
-  handleSubmit,
-  setInputValue,
-  status,
-}: Props) => {
+const TaskForm = ({ setTaskState, status }: Props) => {
   const handleEscKey = (e: KeyboardEvent) => {
     if (e.key === "Escape") setTaskState(false);
   };
@@ -23,10 +16,19 @@ const TaskForm = ({
     document.addEventListener("keydown", handleEscKey);
     return () => document.removeEventListener("keydown", handleEscKey);
   });
+  const addTask = useTaskStore((store) => store.addTask);
+  const inputRef = useRef<HTMLInputElement>(null);
+  const date = formatDate;
+  const handleSubmit = () => {
+    if (inputRef.current) {
+      addTask(Date.now(), inputRef.current.value, status, date);
+      setTaskState(false);
+    }
+  };
   return (
     <section
       onClick={() => setTaskState(false)}
-      className="absolute top-0 left-0 h-screen w-screen bg-[#381717b9] dark:bg-[#484848b6] grid place-content-center"
+      className="absolute top-0 left-0 h-screen w-screen bg-[#381717b9] dark:bg-[#484848b6] grid place-content-center z-50"
     >
       <div
         className="p-2 px-4 rounded-sm bg-white dark:bg-gray-600 text-white"
@@ -38,12 +40,11 @@ const TaskForm = ({
             className="p-1 w-[270px] text-sm outline-none border-2 border-blue-400 rounded-sm text-black"
             placeholder="Add task"
             type="text"
-            value={inputValue}
             onKeyDown={(e) => {
               if (e.key === "Enter") handleSubmit();
             }}
             autoFocus
-            onChange={(e) => setInputValue(e.target.value)}
+            ref={inputRef}
           />
           <Button handleClick={() => handleSubmit()}>Add Task</Button>
         </div>
