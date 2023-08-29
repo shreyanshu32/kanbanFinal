@@ -10,12 +10,7 @@ const Button = ({ children, handleClick }: Props) => {
     <button
       onClick={handleClick}
       className={classNames(
-        "text-sm px-2 p-0.5 border border-gray-400 rounded-sm bg-green-500 text-white"
-        // {
-        //   "bg-gray-400": state === "Planned",
-        //   "bg-blue-400": state === "Progress",
-        //   "bg-green-400": state === "Completed",
-        // }
+        "text-sm px-2 p-0.5 border border-gray-400 rounded-sm hover:bg-blue-400 active:bg-blue-500 bg-blue-500 text-white"
       )}
     >
       {children}

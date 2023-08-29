@@ -1,9 +1,10 @@
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import useTaskStore from "../data/store";
 import Button from "./Button";
 import Task from "./Task";
 import TaskForm from "./TaskForm";
 import classNames from "classnames";
+import formatDate from "../utility/formatDate";
 type Props = {
   state: string;
 };
@@ -19,20 +20,17 @@ const Container = ({ state }: Props) => {
   const setDraggedTask = useTaskStore((store) => store.setDraggedTask);
   const draggedTask = useTaskStore((store) => store.draggedTask);
   const moveTask = useTaskStore((store) => store.moveTask);
+  const date = formatDate;
   const handleSubmit = () => {
     if (inputValue.length > 2) {
-      addTask(Date.now(), inputValue, state);
+      addTask(Date.now(), inputValue, state, date);
       setInputValue("");
       setAddTaskWindowState((state) => !state);
     }
   };
-  useEffect(() => {
-    console.log("dropping");
-  }, [isDropping]);
-
   return (
     <section
-      className="bg-white w-[305px] h-fit p-2 rounded-sm"
+      className="bg-white w-[305px] h-fit p-2 rounded-sm shadow-md"
       onDragOver={(e) => {
         e.preventDefault();
         setIsDropping(true);
@@ -41,7 +39,7 @@ const Container = ({ state }: Props) => {
       onDrop={() => {
         setIsDropping(false);
         const dragged = tasks.filter((task) => task.id == draggedTask)[0].title;
-        moveTask(draggedTask, dragged, state);
+        moveTask(draggedTask, dragged, state, date);
         setDraggedTask(0);
       }}
     >
@@ -67,10 +65,16 @@ const Container = ({ state }: Props) => {
         })}
       >
         {!filteredTasks.length && (
-          <p className="py-2 text-sm pl-1">Add your first task.</p>
+          <p className="py-2 text-sm pl-1">No tasks.</p>
         )}
         {filteredTasks.map((task) => (
-          <Task key={task.id} title={task.title} id={task.id} />
+          <Task
+            key={task.id}
+            title={task.title}
+            id={task.id}
+            state={task.state}
+            date={task.date}
+          />
         ))}
       </section>
 

@@ -29,7 +29,7 @@ const TaskForm = ({
       className="absolute top-0 left-0 h-screen w-screen bg-[#ff92929c] grid place-content-center"
     >
       <div
-        className="p-2 rounded-sm bg-white"
+        className="p-2 px-4 rounded-sm bg-white"
         onClick={(e) => e.stopPropagation()}
       >
         <h1 className="pb-1 font-[500]">{status}</h1>
