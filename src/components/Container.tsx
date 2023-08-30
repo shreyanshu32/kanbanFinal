@@ -5,9 +5,9 @@ import Task from "./Task";
 import TaskForm from "./TaskForm";
 import classNames from "classnames";
 import formatDate from "../utils/formatDate";
-type Props = {
+interface Props {
   state: string;
-};
+}
 const Container = ({ state }: Props) => {
   const [isDropping, setIsDropping] = useState(false);
   const [addTaskWindowState, setAddTaskWindowState] = useState(false);
@@ -41,15 +41,19 @@ const Container = ({ state }: Props) => {
       <header className="flex justify-between items-center border-b border-gray-400 pb-2">
         <p
           className={classNames("font-[500]", {
-            "text-gray-500": state === "Planned",
-            "text-blue-500": state === "In Progress",
-            "text-orange-500": state === "In Review",
-            "text-green-500": state === "Completed",
+            "text-gray-700": state === "Planned",
+            "text-blue-700": state === "In Progress",
+            "text-orange-700": state === "In Review",
+            "text-green-700": state === "Completed",
           })}
         >
           {state}
         </p>
-        <Button handleClick={() => setAddTaskWindowState(true)}>
+        <Button
+          title="addButton"
+          type="button"
+          handleClick={() => setAddTaskWindowState(true)}
+        >
           Add Task
         </Button>
       </header>

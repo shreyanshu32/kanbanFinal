@@ -24,13 +24,13 @@ const Task = ({ id }: TaskType) => {
       draggable
       onDragStart={() => setDraggedTask(id)}
     >
-      <p className="break-words py-0.5 font-[500] text-gray-600 border-b border-gray-300">
+      <p className="break-words py-0.5 font-[500] text-gray-600">
         {task?.title.substring(0, 34)}
       </p>
       <p className="break-words py-0.5 text-gray-600">
         {task?.description.substring(0, 265)}
       </p>
-      <footer className="relative border-t flex items-center justify-between border-gray-300 mt-1 text-sm pt-1">
+      <footer className="relative border-t flex items-center justify-between border-gray-200 mt-1 text-sm pt-1">
         <p
           className={classNames({
             "text-gray-500": task?.state === "Planned",
@@ -41,7 +41,7 @@ const Task = ({ id }: TaskType) => {
         >
           {task?.date}
         </p>
-        <button className="text-base" onClick={() => deleteTask(id)}>
+        <button className="mt-0.5 text-lg" onClick={() => deleteTask(id)}>
           <AiOutlineDelete />
         </button>
       </footer>
