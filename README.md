@@ -5,7 +5,7 @@ _Note: Packages used in this project are installed with yarn and using NPM might
 ### Clone this repository
 
 ```
-git clone git@github.com:arberLisaj/xNotes.git
+git clone git@github.com:arberLisaj/kanban-app.git
 ```
 
 ### Install the dependencies.
