@@ -1,9 +1,9 @@
+import useTaskStore from "@/data/store";
+import TaskInterface from "@/entities/TaskInterface";
 import classNames from "classnames";
-import useTaskStore from "../data/store";
 import { AiOutlineDelete } from "react-icons/ai";
-import TaskType from "../entities/TaskType";
 
-const Task = ({ id }: TaskType) => {
+const Task = ({ id }: TaskInterface) => {
   const deleteTask = useTaskStore((store) => store.deleteTask);
   const task = useTaskStore((store) =>
     store.tasks.find((task) => task.id === id)
@@ -25,7 +25,7 @@ const Task = ({ id }: TaskType) => {
       onDragStart={() => setDraggedTask(id)}
     >
       <p className="break-words py-0.5 font-[500] text-gray-600">
-        {task?.title.substring(0, 34)}
+        {task?.title.substring(0, 50)}
       </p>
       <p className="break-words py-0.5 text-gray-600">
         {task?.description.substring(0, 265)}

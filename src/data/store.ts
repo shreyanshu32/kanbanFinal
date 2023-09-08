@@ -1,6 +1,6 @@
+import TaskType from "@/entities/TaskInterface";
 import { create } from "zustand";
 import { devtools, persist } from "zustand/middleware";
-import TaskType from "../entities/TaskType";
 
 interface TaskStore {
   tasks: TaskType[];

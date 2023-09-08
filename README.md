@@ -8,20 +8,22 @@ _Note: Packages used in this project are installed with yarn and using NPM might
 git clone git@github.com:arberLisaj/kanban-app.git
 ```
 
-### Install the dependencies.
+### Install the dependencies
 
 ```
 yarn
 ```
+
 ```
 npm i
 ```
 
-### Start the developement server.
+### Start the developement server
 
 ```
 yarn dev
 ```
+
 ```
 npm run dev
 ```

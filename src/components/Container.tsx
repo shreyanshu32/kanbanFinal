@@ -1,13 +1,15 @@
+import useTaskStore from "@/data/store";
+import formatDate from "@/utils/formatDate";
+import classNames from "classnames";
 import { useMemo, useState } from "react";
-import useTaskStore from "../data/store";
 import Button from "./Button";
 import Task from "./Task";
 import TaskForm from "./TaskForm";
-import classNames from "classnames";
-import formatDate from "../utils/formatDate";
+
 interface Props {
   state: string;
 }
+
 const Container = ({ state }: Props) => {
   const [isDropping, setIsDropping] = useState(false);
   const [addTaskWindowState, setAddTaskWindowState] = useState(false);

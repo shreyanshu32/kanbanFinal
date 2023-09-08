@@ -1,6 +1,6 @@
+import useTaskStore from "@/data/store";
+import formatDate from "@/utils/formatDate";
 import { useEffect, useRef } from "react";
-import useTaskStore from "../data/store";
-import formatDate from "../utils/formatDate";
 import Button from "./Button";
 
 interface Props {
@@ -9,20 +9,25 @@ interface Props {
 }
 
 const TaskForm = ({ setTaskState, status }: Props) => {
+  const titleRef = useRef<HTMLInputElement>(null);
+  const descRef = useRef<HTMLInputElement>(null);
+  const date = formatDate;
+
   const handleEscKey = (e: KeyboardEvent) => {
     if (e.key === "Escape") setTaskState(false);
   };
+
   useEffect(() => {
     document.addEventListener("keydown", handleEscKey);
     return () => document.removeEventListener("keydown", handleEscKey);
   });
+
   const submitOnEnter = (e: React.KeyboardEvent) => {
     if (e.key === "Enter") handleSubmit();
   };
+
   const addTask = useTaskStore((store) => store.addTask);
-  const titleRef = useRef<HTMLInputElement>(null);
-  const descRef = useRef<HTMLInputElement>(null);
-  const date = formatDate;
+
   const handleSubmit = () => {
     if (titleRef.current && descRef.current) {
       if (

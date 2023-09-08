@@ -1,4 +1,4 @@
-import { days, months } from "../data/date";
+import { days, months } from "@/data/date";
 
 const formatDate= () => {
   const date = new Date();
