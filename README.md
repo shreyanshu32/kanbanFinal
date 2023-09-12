@@ -2,7 +2,7 @@
 
 _Note: Packages used in this project are installed with yarn and using NPM might lead to a conflict between lock files._
 
-### Project Structure
+## Project Structure
 ```
 /
 ├── .github/workflows
@@ -20,6 +20,8 @@ _Note: Packages used in this project are installed with yarn and using NPM might
 │   ├── data/
 |   |   ├── store.ts
 │   |   └── data.ts
+|   ├── entities/
+│   |   └── TaskInterface.ts
 |   ├── styles/
 │   |   └── styles.css
 |   ├── utils/
@@ -35,4 +37,3 @@ All the commands below are run from the root of the project, from a terminal:
 |yarn dev| Starts local dev server at localhost:3000| 
 |yarn build | Build your production site to ./dist/
 |yarn preview | Preview your build locally, before deploying|
-
