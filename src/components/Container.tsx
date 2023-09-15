@@ -13,15 +13,13 @@ interface Props {
 const Container = ({ state }: Props) => {
   const [isDropping, setIsDropping] = useState(false);
   const [addTaskWindowState, setAddTaskWindowState] = useState(false);
-  const tasks = useTaskStore((store) => store.tasks);
+  const date = formatDate;
+  const { tasks, setDraggedTask, draggedTask, moveTask } = useTaskStore();
+
   const filteredTasks = useMemo(
     () => tasks.filter((task) => task.state === state),
     [tasks, state]
   );
-  const setDraggedTask = useTaskStore((store) => store.setDraggedTask);
-  const draggedTask = useTaskStore((store) => store.draggedTask);
-  const moveTask = useTaskStore((store) => store.moveTask);
-  const date = formatDate;
 
   return (
     <section

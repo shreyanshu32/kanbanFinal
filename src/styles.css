@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-@layer components {
+@layer base {
   input {
     @apply p-1.5 w-[300px] text-sm outline-none border-2 rounded-sm;
   }

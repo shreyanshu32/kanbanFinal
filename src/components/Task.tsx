@@ -1,14 +1,20 @@
 import useTaskStore from "@/data/store";
-import TaskInterface from "@/entities/TaskInterface";
 import classNames from "classnames";
 import { AiOutlineDelete } from "react-icons/ai";
 
-const Task = ({ id }: TaskInterface) => {
-  const deleteTask = useTaskStore((store) => store.deleteTask);
+export interface TaskType {
+  id: number;
+  title: string;
+  description: string;
+  state: string;
+  date: string;
+}
+
+const Task = ({ id }: TaskType) => {
+  const { setDraggedTask, deleteTask } = useTaskStore();
   const task = useTaskStore((store) =>
     store.tasks.find((task) => task.id === id)
   );
-  const setDraggedTask = useTaskStore((store) => store.setDraggedTask);
 
   return (
     <article

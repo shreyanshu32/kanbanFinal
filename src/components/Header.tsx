@@ -14,9 +14,9 @@ const Header = () => {
   }, [darkMode]);
 
   return (
-    <header className="w-full bg-white p-2 dark:bg-[#181B20] dark:text-white">
+    <header className="w-full bg-white p-2 dark:bg-[#272c34] dark:border-b border-gray-500 dark:text-white">
       <section className="max-w-[1250px] mx-auto flex items-center justify-between">
-        <h1>Kanban</h1>
+        <h1>My Tasks</h1>
         <button
           tabIndex={0}
           title="darkModeButton"

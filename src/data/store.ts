@@ -1,4 +1,4 @@
-import TaskType from "@/entities/TaskInterface";
+import { TaskType } from "@/components/Task";
 import { create } from "zustand";
 import { devtools, persist } from "zustand/middleware";
 

@@ -22,10 +22,6 @@ const TaskForm = ({ setTaskState, status }: Props) => {
     return () => document.removeEventListener("keydown", handleEscKey);
   });
 
-  const submitOnEnter = (e: React.KeyboardEvent) => {
-    if (e.key === "Enter") handleSubmit();
-  };
-
   const addTask = useTaskStore((store) => store.addTask);
 
   const handleSubmit = () => {
@@ -55,15 +51,17 @@ const TaskForm = ({ setTaskState, status }: Props) => {
         className="p-4 px-8 rounded-sm bg-white dark:bg-gray-600 shadow-md"
         onClick={(e) => e.stopPropagation()}
       >
-        <h1 className="pb-1 text-lg font-[500] dark:text-white">{status}</h1>
+        <h1 className="pb-1 text-lg font-[500] mb-1 dark:text-white">{status}</h1>
         <form
-          onSubmit={(e) => e.preventDefault()}
+          onSubmit={(e) => {
+            e.preventDefault();
+            handleSubmit();
+          }}
           className="flex flex-col gap-1.5 pb-2 "
         >
           <input
             placeholder="Task title... (at least 3 characters)"
             type="text"
-            onKeyDown={(e) => submitOnEnter(e)}
             autoFocus
             required
             ref={titleRef}
@@ -73,14 +71,8 @@ const TaskForm = ({ setTaskState, status }: Props) => {
             type="text"
             required
             ref={descRef}
-            onKeyDown={(e) => submitOnEnter(e)}
           />
-          <Button
-            type="submit"
-            title="submitButton"
-            className="py-1.5"
-            handleClick={() => handleSubmit()}
-          >
+          <Button type="submit" title="submitButton" className="py-2">
             Create
           </Button>
         </form>
