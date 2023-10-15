@@ -1,4 +1,4 @@
-import useTaskStore from "@/data/store";
+import useTaskStore from "@/store";
 import formatDate from "@/utils/formatDate";
 import classNames from "classnames";
 import { useMemo, useState } from "react";
@@ -6,13 +6,9 @@ import Button from "./Button";
 import Task from "./Task";
 import TaskForm from "./TaskForm";
 
-interface Props {
-  state: string;
-}
-
-const Container = ({ state }: Props) => {
+const Container = ({ state }: { state: string }) => {
   const [isDropping, setIsDropping] = useState(false);
-  const [addTaskWindowState, setAddTaskWindowState] = useState(false);
+  const [addTaskWindow, setAddTaskWindow] = useState(false);
   const date = formatDate;
   const { tasks, setDraggedTask, draggedTask, moveTask } = useTaskStore();
 
@@ -38,7 +34,7 @@ const Container = ({ state }: Props) => {
         setDraggedTask(0);
       }}
     >
-      <header className="flex justify-between items-center border-b border-gray-400 pb-2">
+      <header className="flex items-center justify-between pb-2 border-b border-gray-400">
         <p
           className={classNames("font-[500]", {
             "text-gray-700": state === "Planned",
@@ -52,7 +48,7 @@ const Container = ({ state }: Props) => {
         <Button
           title="addButton"
           type="button"
-          handleClick={() => setAddTaskWindowState(true)}
+          handleClick={() => setAddTaskWindow((value) => !value)}
         >
           Add Task
         </Button>
@@ -64,24 +60,17 @@ const Container = ({ state }: Props) => {
         })}
       >
         {!filteredTasks.length && (
-          <p className="py-2 text-sm pl-1">No tasks.</p>
+          <p className="py-2 pl-1 text-sm">No tasks.</p>
         )}
         {filteredTasks.map((task) => (
-          <Task
-            key={task.id}
-            title={task.title}
-            description={task.description}
-            id={task.id}
-            state={task.state}
-            date={task.date}
-          />
+          <Task key={task.id} id={task.id} />
         ))}
       </section>
 
-      {addTaskWindowState && (
+      {addTaskWindow && (
         <TaskForm
           status={state}
-          setTaskState={(value) => setAddTaskWindowState(value)}
+          setTaskState={(value) => setAddTaskWindow(value)}
         />
       )}
     </section>

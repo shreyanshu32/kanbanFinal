@@ -1,17 +1,11 @@
-import useTaskStore from "@/data/store";
+import useTaskStore from "@/store";
 import classNames from "classnames";
 import { AiOutlineDelete } from "react-icons/ai";
 
-export interface TaskType {
-  id: number;
-  title: string;
-  description: string;
-  state: string;
-  date: string;
-}
+const Task = ({ id }: { id: number }) => {
+  const deleteTask = useTaskStore((s) => s.deleteTask);
+  const setDraggedTask = useTaskStore((s) => s.setDraggedTask);
 
-const Task = ({ id }: TaskType) => {
-  const { setDraggedTask, deleteTask } = useTaskStore();
   const task = useTaskStore((store) =>
     store.tasks.find((task) => task.id === id)
   );
@@ -36,7 +30,7 @@ const Task = ({ id }: TaskType) => {
       <p className="break-words py-0.5 text-gray-600">
         {task?.description.substring(0, 265)}
       </p>
-      <footer className="relative border-t flex items-center justify-between border-gray-200 mt-1 text-sm pt-1">
+      <footer className="relative flex items-center justify-between pt-1 mt-1 text-sm border-t border-gray-200">
         <p
           className={classNames({
             "text-gray-500": task?.state === "Planned",

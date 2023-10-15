@@ -1,4 +1,4 @@
-import useTaskStore from "@/data/store";
+import useTaskStore from "@/store";
 import formatDate from "@/utils/formatDate";
 import { useEffect, useRef } from "react";
 import Button from "./Button";
@@ -48,10 +48,12 @@ const TaskForm = ({ setTaskState, status }: Props) => {
       className="absolute top-0 left-0 h-screen w-screen bg-[#381717b9] dark:bg-[#484848b6] grid place-content-center z-50"
     >
       <div
-        className="p-4 px-8 rounded-sm bg-white dark:bg-gray-600 shadow-md"
+        className="p-4 px-8 bg-white rounded-sm shadow-md dark:bg-gray-600"
         onClick={(e) => e.stopPropagation()}
       >
-        <h1 className="pb-1 text-lg font-[500] mb-1 dark:text-white">{status}</h1>
+        <h1 className="pb-1 text-lg font-[500] mb-1 dark:text-white">
+          {status}
+        </h1>
         <form
           onSubmit={(e) => {
             e.preventDefault();

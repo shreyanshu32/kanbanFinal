@@ -8,7 +8,7 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <main className=" bg-red-400 min-h-screen dark:bg-[#23272F] ">
       <Header />
-      <div className="flex gap-2 p-2 py-4 mx-auto w-fit flex-wrap ">
+      <div className="flex flex-wrap justify-center gap-2 p-2 py-4 mx-auto sm:justify-start w-fit ">
         <Container state="Planned" />
         <Container state="In Progress" />
         <Container state="In Review" />

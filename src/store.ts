@@ -1,6 +1,13 @@
-import { TaskType } from "@/components/Task";
 import { create } from "zustand";
 import { devtools, persist } from "zustand/middleware";
+
+interface TaskType {
+  id: number;
+  title: string;
+  description: string;
+  state: string;
+  date: string;
+}
 
 interface TaskStore {
   tasks: TaskType[];
