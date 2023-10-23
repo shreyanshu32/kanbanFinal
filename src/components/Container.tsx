@@ -19,7 +19,7 @@ const Container = ({ state }: { state: string }) => {
 
   return (
     <section
-      className="bg-white dark:bg-gray-200 w-[305px] h-fit p-2 rounded-sm shadow-md"
+      className="bg-white border-gray-300 border w-[305px] h-fit p-2 rounded-sm shadow-md"
       onDragOver={(e) => {
         e.preventDefault();
         setIsDropping(true);
@@ -34,7 +34,7 @@ const Container = ({ state }: { state: string }) => {
         setDraggedTask(0);
       }}
     >
-      <header className="flex items-center justify-between pb-2 border-b border-gray-400">
+      <header className="flex items-center justify-between pb-2 border-b border-gray-300">
         <p
           className={classNames("font-[500]", {
             "text-gray-700": state === "Planned",
@@ -48,9 +48,10 @@ const Container = ({ state }: { state: string }) => {
         <Button
           title="addButton"
           type="button"
+          className="py-1"
           handleClick={() => setAddTaskWindow((value) => !value)}
         >
-          Add Task
+          Create 
         </Button>
       </header>
 
@@ -60,7 +61,7 @@ const Container = ({ state }: { state: string }) => {
         })}
       >
         {!filteredTasks.length && (
-          <p className="py-2 pl-1 text-sm">No tasks.</p>
+          <p className="pb-1 pl-0.5 text-sm">No tasks.</p>
         )}
         {filteredTasks.map((task) => (
           <Task key={task.id} id={task.id} />

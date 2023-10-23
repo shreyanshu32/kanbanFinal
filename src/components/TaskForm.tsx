@@ -45,15 +45,13 @@ const TaskForm = ({ setTaskState, status }: Props) => {
   return (
     <div
       onClick={() => setTaskState(false)}
-      className="absolute top-0 left-0 h-screen w-screen bg-[#381717b9] dark:bg-[#484848b6] grid place-content-center z-50"
+      className="absolute top-0 left-0 h-screen w-screen bg-[#282828b9] grid place-content-center z-50"
     >
       <div
-        className="p-4 px-8 bg-white rounded-sm shadow-md dark:bg-gray-600"
+        className="p-5 px-8 bg-white rounded shadow-md"
         onClick={(e) => e.stopPropagation()}
       >
-        <h1 className="pb-1 text-lg font-[500] mb-1 dark:text-white">
-          {status}
-        </h1>
+        <h1 className="text-lg font-[500] text-black mb-1">{status}</h1>
         <form
           onSubmit={(e) => {
             e.preventDefault();
@@ -62,20 +60,20 @@ const TaskForm = ({ setTaskState, status }: Props) => {
           className="flex flex-col gap-1.5 pb-2 "
         >
           <input
-            placeholder="Task title... (at least 3 characters)"
+            placeholder="Title... (at least 3 characters)"
             type="text"
             autoFocus
             required
             ref={titleRef}
           />
           <input
-            placeholder="Task description... (at least 6 characters)"
+            placeholder="Description... (at least 6 characters)"
             type="text"
             required
             ref={descRef}
           />
-          <Button type="submit" title="submitButton" className="py-2">
-            Create
+          <Button type="submit" title="submitButton">
+            Create Task
           </Button>
         </form>
       </div>

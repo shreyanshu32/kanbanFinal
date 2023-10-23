@@ -11,8 +11,6 @@ interface TaskType {
 
 interface TaskStore {
   tasks: TaskType[];
-  darkMode: boolean;
-  setDarkMode: () => void;
   addTask: (task: TaskType) => void;
   deleteTask: (id: number) => void;
   draggedTask: number;
@@ -31,9 +29,6 @@ const useTaskStore = create<TaskStore>()(
     persist(
       (set) => ({
         tasks: [],
-        darkMode: false,
-        setDarkMode: () =>
-          set((store) => ({ darkMode: store.darkMode ? false : true })),
         draggedTask: 0,
         addTask: (task) =>
           set((store) => ({

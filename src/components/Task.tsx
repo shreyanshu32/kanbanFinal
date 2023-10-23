@@ -24,10 +24,10 @@ const Task = ({ id }: { id: number }) => {
       draggable
       onDragStart={() => setDraggedTask(id)}
     >
-      <p className="break-words py-0.5 font-[500] text-gray-600">
+      <p className="break-words font-[500] text-gray-600">
         {task?.title.substring(0, 50)}
       </p>
-      <p className="break-words py-0.5 text-gray-600">
+      <p className="break-words text-gray-600">
         {task?.description.substring(0, 265)}
       </p>
       <footer className="relative flex items-center justify-between pt-1 mt-1 text-sm border-t border-gray-200">
